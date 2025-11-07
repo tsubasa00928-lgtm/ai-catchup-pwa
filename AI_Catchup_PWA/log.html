@@ -1,0 +1,75 @@
+
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>AI Catch-up | Log</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#020817">
+</head>
+<body data-page="log">
+<div class="app">
+  <header class="app-header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <div>
+        <div class="logo-text-main">AI CATCH-UP DASHBOARD</div>
+        <div class="logo-text-sub">③ 記帳・スキルログ</div>
+      </div>
+    </div>
+    <div class="chip">Your Growth Archive</div>
+  </header>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-link">① AIサービス一覧</a>
+    <a href="news.html" class="nav-link">② AIニュース</a>
+    <a href="log.html" class="nav-link active">③ 記帳・自己成長ログ</a>
+  </nav>
+
+  <div class="panel log-layout">
+    <section class="log-form">
+      <div class="section-title">今日のログを残す</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px;">
+        「この時期の自分はどのくらいAIを理解し、何ができていたか」を後から振り返るためのページ。
+      </div>
+      <label>日付</label>
+      <input id="logDate" type="date">
+      <label style="margin-top:4px;">タイトル / トピック</label>
+      <input id="logTitle" type="text" placeholder="例: GPTのAgentsを触り始めた / LLMで簡単なアプリ作れた">
+      <label style="margin-top:4px;">今日の学び・できるようになったこと</label>
+      <textarea id="logLearning" placeholder="技術理解、触ったサービス、作ったもの、インプット内容など"></textarea>
+      <label style="margin-top:4px;">感情・メモ（任意）</label>
+      <textarea id="logFeeling" placeholder="悔しさ / 手応え / 次に伸ばしたいポイントなど"></textarea>
+      <label style="margin-top:4px;">自己評価（AIリテラシー / 技術理解：★0〜5）</label>
+      <input id="logScore" type="number" min="0" max="5" placeholder="例: 3">
+      <label style="margin-top:4px;">タグ（カンマ区切り / 例: LLM, 画像生成, 就活, ビジネスアイデア）</label>
+      <input id="logTags" type="text">
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
+        <button class="btn btn-xs" id="saveLogBtn">保存</button>
+        <button class="btn btn-xs" id="clearTodayBtn" style="border-color:#4b5563;color:#9ca3af;">入力クリア</button>
+      </div>
+      <div class="note-small">
+        ※ブラウザのローカルストレージに保存されます（端末ごとに独立）。<br>
+        ※あとから「この頃の自分の★スコア」「どんな概念まで理解してたか」を時間軸で追えます。
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">これまでのログ</div>
+      <div id="logList" class="log-list"></div>
+      <div class="note-small">
+        ※将来的には期間フィルタやグラフ表示（平均スコア推移、タグ別成長）も追加可能な構造にしてあります。
+      </div>
+    </section>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js').catch(console.error);
+  }
+</script>
+</body>
+</html>
