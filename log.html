@@ -1,0 +1,65 @@
+
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>AI Catch-up | Log</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body data-page="log">
+<div class="app">
+  <header class="app-header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <div>
+        <div class="logo-text-main">AI CATCH-UP DASHBOARD</div>
+        <div class="logo-text-sub">③ 記帳・スキルログ（シンプル版）</div>
+      </div>
+    </div>
+    <div class="chip">Your Growth Snapshot</div>
+  </header>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-link">① AIサービス一覧</a>
+    <a href="news.html" class="nav-link">② AIニュース</a>
+    <a href="log.html" class="nav-link active">③ 記帳・自己成長ログ</a>
+  </nav>
+
+  <div class="panel log-layout">
+    <section class="log-form">
+      <div class="section-title">今日の一行ログ</div>
+      <div style="font-size:10px;color:#6b7280;margin-bottom:4px;">
+        難しく考えず、「何を触った／理解した／できるようになったか」を短く残すだけのページ。
+      </div>
+      <label>日付</label>
+      <input id="logDate" type="date">
+      <label style="margin-top:4px;">内容</label>
+      <textarea id="logText" placeholder="例: GPTのAPIで簡単なアプリを作れた / ClaudeとGeminiの違いを整理した など"></textarea>
+      <label style="margin-top:4px;">自己評価（AIリテラシー感：★0〜5 任意）</label>
+      <input id="logScore" type="number" min="0" max="5" placeholder="数字だけ入れてOK（例: 3）">
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
+        <button class="btn btn-xs" id="saveLogBtn">保存</button>
+        <button class="btn btn-xs" id="clearTodayBtn" style="border-color:#d1d5db;color:#6b7280;background:#ffffff;">入力クリア</button>
+      </div>
+      <div class="note-small">
+        ※localStorageに保存。1行ずつでも良いから、続けることが目的。
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">これまでのログ</div>
+      <div id="logList" class="log-list"></div>
+    </section>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js').catch(console.error);
+  }
+</script>
+</body>
+</html>
